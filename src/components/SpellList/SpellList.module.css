@@ -1,3 +1,7 @@
+.main {
+  text-align: left;
+}
+
 .list {
   margin: var(--gutter-20) 0;
   display: flex;
@@ -9,3 +13,4 @@
 .item {
   flex: 0 0 320px;
 }
+

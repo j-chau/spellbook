@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import styles from './SpellCard.module.css';
 import Tooltip from '../Tooltip';
+import styles from './SpellCard.module.css';
 
 type PropsType = {
   title: string;

@@ -12,3 +12,5 @@ export type CardType = {
   can_be_cast_as_ritual: boolean;
   requires_concentration: boolean;
 };
+
+export type ToastActionType = 'Add' | 'Remove';

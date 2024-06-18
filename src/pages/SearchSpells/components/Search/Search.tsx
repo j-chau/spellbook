@@ -1,9 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useDebounce } from '../../hooks/useDebounce';
+import { useDebounce } from '../../../../hooks/useDebounce';
 import TextField from '@mui/material/TextField';
-import { CardType } from '../types';
-
-const BASE_URL = 'https://api.open5e.com/v1/spells/';
+import { CardType } from '../../../../types';
+import { BASE_URL } from '../../../../constants';
 
 type PropsType = {
   setCardData: React.Dispatch<React.SetStateAction<Array<CardType>>>;

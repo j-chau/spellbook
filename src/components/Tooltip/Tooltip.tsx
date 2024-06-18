@@ -1,6 +1,6 @@
 import React from 'react';
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
-import { styled } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 type PropsType = {
   children: React.ReactElement;

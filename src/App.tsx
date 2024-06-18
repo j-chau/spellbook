@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import Search from './components/Search';
-import SpellList from './components/SpellList';
-import type { CardType } from './components/types';
 import { ThemeProvider, createTheme } from '@mui/material';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import SearchSpells from './pages/SearchSpells';
+import MySpells from './pages/MySpells';
 
 const theme = createTheme({
   typography: {
@@ -12,13 +12,17 @@ const theme = createTheme({
 });
 
 function App() {
-  const [cardData, setCardData] = useState<Array<CardType>>([]);
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
         <h1>SpellBook</h1>
-        <Search setCardData={setCardData} />
-        <SpellList cards={cardData} />
+
+        <BrowserRouter>
+          <Routes>
+            <Route path="/search" Component={SearchSpells}></Route>
+            <Route path="/" Component={MySpells}></Route>
+          </Routes>
+        </BrowserRouter>
       </div>
     </ThemeProvider>
   );

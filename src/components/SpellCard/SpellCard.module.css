@@ -1,5 +1,5 @@
 .main {
-  border: 1px solid grey;
+  border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   margin: var(--gutter-4);
   padding: var(--gutter-10);
@@ -8,11 +8,13 @@
   flex-direction: column;
   justify-content: flex-start;
   background-color: white;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .header {
   text-align: center;
   margin: var(--gutter-6) 0 var(--gutter-20);
+  position: relative;
 }
 
 .title {
@@ -22,6 +24,7 @@
 
 .subTitle {
   display: block;
+  color: var(--color-text-secondary);
 }
 
 .info {
@@ -34,11 +37,13 @@
 .section {
   text-align: center;
   cursor: default;
+  color: var(--color-text-secondary);
 }
 
 .sectionTitle {
   font-weight: var(--font-weight-semi);
   display: block;
+  color: var(--color-text-primary);
 }
 
 .tooltipItem {

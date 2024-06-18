@@ -6,5 +6,13 @@
   --font-weight-semi: 500;
   --border-radius: 4px;
 
+  --color-text-primary: #1c1c1c;
+  --color-text-secondary: #434343;
+  --color-text-tertiary: #7b7d7b;
+  --color-danger: #c13636;
+  --color-success: #36c136;
+  --color-border: #c5c5c5;
+
   padding: var(--gutter-20);
+  color: var(--color-text-primary);
 }
