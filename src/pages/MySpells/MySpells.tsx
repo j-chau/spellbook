@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
 import SpellList from '../../components/SpellList';
 import {
   overwrite as overwriteLS,
@@ -9,9 +8,9 @@ import { BASE_URL, MY_SPELLS_LS_KEY } from '../../constants';
 import { CardType } from '../../types';
 import styles from './MySpells.module.css';
 
-const cardData = readLS(MY_SPELLS_LS_KEY);
-
 const MySpells = () => {
+  const cardData = readLS(MY_SPELLS_LS_KEY);
+
   const [myCards, setMyCards] = useState<CardType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -43,16 +42,12 @@ const MySpells = () => {
     if (cardData) {
       getSavedData(cardData);
     }
-  }, []);
+  }, [cardData]);
 
   return (
     <div className={styles.main}>
       <h2>My Spells</h2>
-      {isLoading ? (
-        <CircularProgress />
-      ) : (
-        <SpellList cards={myCards} hideCardOnRemove />
-      )}
+      <SpellList cards={myCards} isLoading={isLoading} hideCardOnRemove />
     </div>
   );
 };

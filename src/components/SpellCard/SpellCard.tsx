@@ -12,8 +12,6 @@ import {
 import { MY_SPELLS_LS_KEY } from '../../constants';
 import RemoveButton from '../RemoveButton';
 
-const prevAddedCards = readLS(MY_SPELLS_LS_KEY) || [];
-
 type PropsType = {
   card: CardType;
   setShowToast: ({
@@ -28,6 +26,8 @@ type PropsType = {
 };
 
 const SpellCard = ({ card, setShowToast }: PropsType) => {
+  const prevAddedCards = readLS(MY_SPELLS_LS_KEY) || [];
+
   const [hideCardButton, setHideCardButton] = useState(true);
   const [addedCards, setAddedCards] = useState(prevAddedCards);
 

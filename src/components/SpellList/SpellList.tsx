@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Slide, { SlideProps } from '@mui/material/Slide';
 import Snackbar from '@mui/material/Snackbar';
+import CircularProgress from '@mui/material/CircularProgress';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import SpellCard from '../SpellCard';
 import { CardType, ToastActionType } from '../../types';
@@ -8,10 +9,15 @@ import styles from './SpellList.module.css';
 
 type PropsType = {
   cards: Array<CardType>;
+  isLoading?: boolean;
   hideCardOnRemove?: boolean;
 };
 
-const SpellList = ({ cards, hideCardOnRemove = false }: PropsType) => {
+const SpellList = ({
+  cards,
+  isLoading = false,
+  hideCardOnRemove = false,
+}: PropsType) => {
   const [cardsToShow, setCardsToShow] = useState<CardType[]>([]);
   const [isToastOpen, setIsToastOpen] = useState(false);
   const [toastId, setToastId] = useState('');
@@ -42,6 +48,8 @@ const SpellList = ({ cards, hideCardOnRemove = false }: PropsType) => {
       setCardsToShow((prev) => prev.filter((card) => card.slug !== id));
     }
   };
+
+  if (isLoading) return <CircularProgress />;
 
   return (
     <div className={styles.main}>

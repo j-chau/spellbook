@@ -1,9 +1,12 @@
 .App {
   --gutter-4: 0.4rem;
   --gutter-6: 0.6rem;
+  --gutter-8: 0.8rem;
   --gutter-10: 1rem;
   --gutter-20: 2rem;
+  --font-weight-bold: 700;
   --font-weight-semi: 500;
+  --font-weight-medium: 400;
   --border-radius: 4px;
 
   --color-text-primary: #1c1c1c;
@@ -12,7 +15,33 @@
   --color-danger: #c13636;
   --color-success: #36c136;
   --color-border: #c5c5c5;
+  --color-accent: #ff6136;
 
   padding: var(--gutter-20);
   color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+}
+
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: var(--gutter-20);
+  position: relative;
+  height: 32px;
+  background-color: #fbf7f5;
+  padding: var(--gutter-20);
+}
+
+.Title {
+  position: absolute;
+  font-weight: var(--font-weight-semi);
+  letter-spacing: -2px;
+}
+
+.Title--subheader {
+  letter-spacing: 0;
+  color: var(--color-accent);
+  font-weight: var(--font-weight-bold);
 }
