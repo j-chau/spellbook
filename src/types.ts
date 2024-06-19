@@ -1,3 +1,5 @@
+import { playableClasses, schoolsOfMagic } from './constants';
+
 export type CardType = {
   slug: string;
   name: string;
@@ -14,3 +16,6 @@ export type CardType = {
 };
 
 export type ToastActionType = 'Add' | 'Remove';
+
+export type PlayableClassesType = (typeof playableClasses)[number];
+export type SchoolsOfMagicType = (typeof schoolsOfMagic)[number];

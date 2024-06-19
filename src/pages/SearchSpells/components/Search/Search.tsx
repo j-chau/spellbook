@@ -1,48 +1,34 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useDebounce } from '../../../../hooks/useDebounce';
+import React, { ChangeEvent } from 'react';
 import TextField from '@mui/material/TextField';
-import { CardType } from '../../../../types';
-import { BASE_URL } from '../../../../constants';
-import styles from './Search.module.css';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
 
 type PropsType = {
-  setCardData: React.Dispatch<React.SetStateAction<Array<CardType>>>;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  searchValue: string;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const Search = ({ setCardData, setIsLoading }: PropsType) => {
-  const [searchValue, setSearchValue] = useState('');
-  const searchTerm = useDebounce(searchValue);
-
-  useEffect(() => {
-    const getData = async () => {
-      const data = await fetch(`${BASE_URL}?search=${searchTerm}`).then((res) =>
-        res.json(),
-      );
-      setCardData(data.results);
-      setIsLoading(false);
-    };
-    if (searchTerm) {
-      setIsLoading(true);
-      getData();
-    }
-  }, [searchTerm, setCardData, setIsLoading]);
-
+const Search = ({ searchValue, setSearchValue }: PropsType) => {
   const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
 
   return (
-    <div className={styles.main}>
-      <TextField
-        id="outlined-basic"
-        label="Search"
-        variant="outlined"
-        size="small"
-        value={searchValue}
-        onChange={handleSearchInput}
-      />
-    </div>
+    <TextField
+      id="search-bar"
+      label="Search"
+      variant="outlined"
+      size="small"
+      value={searchValue}
+      onChange={handleSearchInput}
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <SearchIcon />
+          </InputAdornment>
+        ),
+      }}
+    />
   );
 };
 
