@@ -1,5 +1,6 @@
 # SpellBook
-A React App that searches through the(Open5e)[https://open5e.com/]  API and returns spells that can be added to a D&D player's deck.
+
+A React App that searches through the [Open5e](https://open5e.com/)  API and returns spells that can be added to a D&D player's deck.
 
 [[Live Demo]](https://j-chau.github.io/spellbook/)
 
