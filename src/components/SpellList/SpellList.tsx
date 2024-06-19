@@ -50,6 +50,7 @@ const SpellList = ({
   };
 
   if (isLoading) return <CircularProgress />;
+  if (!cardsToShow.length) return <span>No spells found</span>;
 
   return (
     <div className={styles.main}>

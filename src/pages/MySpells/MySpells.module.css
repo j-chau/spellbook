@@ -1,3 +1,7 @@
 .main {
   text-align: center;
 }
+
+.title {
+  margin-bottom: var(--gutter-20);
+}

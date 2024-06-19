@@ -3,6 +3,10 @@ export const read = (key: string): string[] | undefined => {
   return arr ? JSON.parse(arr) : undefined;
 };
 
+export const clear = (key: string) => {
+  localStorage.removeItem(key);
+};
+
 export const update = (key: string, value: any) => {
   const arr = new Set(read(key));
 
@@ -24,6 +28,6 @@ export const remove = (key: string, value: any) => {
 };
 
 export const overwrite = (key: string, value: any[]) => {
-  localStorage.removeItem(key);
+  clear(key);
   localStorage.setItem(key, JSON.stringify(value));
 };
