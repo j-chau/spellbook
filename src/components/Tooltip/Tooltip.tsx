@@ -2,7 +2,7 @@ import React from 'react';
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import { styled } from '@mui/material/styles';
 
-type PropsType = {
+type PropsType = Omit<TooltipProps, 'title'> & {
   children: React.ReactElement;
   content?: React.ReactNode | string;
 };
@@ -19,8 +19,12 @@ const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
   },
 }));
 
-const CustomTooltip = ({ children, content }: PropsType) => {
-  return <StyledTooltip title={content ?? null}>{children}</StyledTooltip>;
+const CustomTooltip = ({ children, content, ...props }: PropsType) => {
+  return (
+    <StyledTooltip title={content ?? null} {...props}>
+      {children}
+    </StyledTooltip>
+  );
 };
 
 export default CustomTooltip;

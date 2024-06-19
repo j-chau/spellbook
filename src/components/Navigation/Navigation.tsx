@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './Navigation.module.css';
 
 const Navigation = () => {
-  const getClasses = ({ isActive }: any) =>
+  const getClasses = ({ isActive }: { isActive: boolean }) =>
     [styles.link, isActive ? styles.active : ''].join(' ');
 
   return (

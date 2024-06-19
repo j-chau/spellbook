@@ -3,6 +3,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { capitalize } from '../../utils/utils';
 
 type PropsType<T> = {
   currentValue: T;
@@ -40,7 +41,7 @@ const Filter = <T extends string>({
         </MenuItem>
         {items.map((item) => (
           <MenuItem value={item} key={item}>
-            {item}
+            {capitalize(item)}
           </MenuItem>
         ))}
       </Select>

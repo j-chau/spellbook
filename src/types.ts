@@ -19,3 +19,13 @@ export type ToastActionType = 'Add' | 'Remove';
 
 export type PlayableClassesType = (typeof playableClasses)[number];
 export type SchoolsOfMagicType = (typeof schoolsOfMagic)[number];
+
+export const isValidPlayerClass = (
+  value: string,
+): value is PlayableClassesType =>
+  playableClasses.includes(value as PlayableClassesType);
+
+export const isValidSchoolOfMagic = (
+  value: string,
+): value is SchoolsOfMagicType =>
+  schoolsOfMagic.includes(value as SchoolsOfMagicType);

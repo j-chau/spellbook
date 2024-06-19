@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { CardType, ToastActionType } from '../../types';
 import styles from './SpellCard.module.css';
 import SpellCardSection from './SpellCardSection';
@@ -40,7 +40,6 @@ const SpellCard = ({ card, setShowToast }: PropsType) => {
     range,
     casting_time,
     components,
-    requires_material_components,
     material,
     can_be_cast_as_ritual,
     requires_concentration,
@@ -48,13 +47,7 @@ const SpellCard = ({ card, setShowToast }: PropsType) => {
 
   const isCardAdded = addedCards.some((cardId) => cardId === id);
 
-  const materialList: string[] | undefined = useMemo(
-    () =>
-      requires_material_components && material.length > 0
-        ? material.split(/, |and/)
-        : undefined,
-    [requires_material_components, material],
-  );
+  const [castingTime, castingConditions] = casting_time.split(', ');
 
   const handleAddCard = () => {
     const updatedCards = [...addedCards, id];
@@ -91,11 +84,15 @@ const SpellCard = ({ card, setShowToast }: PropsType) => {
       <div className={styles.info}>
         <SpellCardSection title="Duration" value={duration} />
         <SpellCardSection title="Range" value={range} />
-        <SpellCardSection title="Casting Time" value={casting_time} />
+        <SpellCardSection
+          title="Casting Time"
+          value={castingTime}
+          tooltipContent={castingConditions}
+        />
         <SpellCardSection
           title="Components"
           value={components}
-          tooltipList={materialList}
+          tooltipContent={material}
         />
       </div>
 

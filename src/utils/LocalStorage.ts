@@ -28,6 +28,5 @@ export const remove = (key: string, value: any) => {
 };
 
 export const overwrite = (key: string, value: any[]) => {
-  clear(key);
   localStorage.setItem(key, JSON.stringify(value));
 };
