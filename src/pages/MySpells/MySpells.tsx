@@ -47,12 +47,12 @@ const MySpells = () => {
       }
     };
 
-    if (cardData) {
+    if (cardData && cardData.length !== myCards.length) {
       getSavedData(cardData);
     } else {
       setIsLoading(false);
     }
-  }, [cardData]);
+  }, [cardData, myCards]);
 
   const handleOpenWarning = () => setShowWarning(true);
   const handleCloseWarning = () => setShowWarning(false);
