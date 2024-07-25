@@ -78,6 +78,7 @@ const SearchSpells = () => {
       setSearchParams(newSearchParams);
     } else if (!searchTerm && !playerClass && !schoolOfMagic) {
       setCardData([]);
+      setSearchParams({});
     }
   }, [
     searchTerm,
