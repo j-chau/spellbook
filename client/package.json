@@ -55,5 +55,6 @@
     "jest-environment-jsdom": "^29.7.0",
     "prettier": "3.3.2",
     "ts-jest": "^29.1.5"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

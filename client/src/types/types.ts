@@ -1,10 +1,10 @@
-import { playableClasses, schoolsOfMagic } from './constants';
+import { playableClasses, schoolsOfMagic } from '../constants';
 
 export type CardType = {
   slug: string;
   name: string;
   spell_level: number;
-  school: string;
+  school: SchoolsOfMagicType;
   duration: string;
   range: string;
   casting_time: string;

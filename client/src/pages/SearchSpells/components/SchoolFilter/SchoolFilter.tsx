@@ -1,7 +1,7 @@
 import React from 'react';
 import Filter from '../../../../components/Filter';
 import { schoolsOfMagic } from '../../../../constants';
-import { SchoolsOfMagicType } from '../../../../types';
+import { SchoolsOfMagicType } from '../../../../types/types';
 
 type PropsType = {
   school: SchoolsOfMagicType | '';

@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
-import { CardType, ToastActionType } from '../../types';
+import { useState } from 'react';
+import { CardType, ToastActionType } from '../../types/types';
 import styles from './SpellCard.module.css';
 import SpellCardSection from './SpellCardSection';
 import AddButton from '../AddButton';
 import { capitalize } from '../../utils/utils';
-import {
-  read as readLS,
-  remove as removeLS,
-  update as updateLS,
-} from '../../utils/LocalStorage';
-import { MY_SPELLS_LS_KEY } from '../../constants';
 import RemoveButton from '../RemoveButton';
+import * as SavedSpellsAPI from '../../utils/SavedSpellsAPI';
 
 type PropsType = {
   card: CardType;
+  isCardAdded: boolean;
   setShowToast: ({
     id,
     name,
@@ -25,11 +21,9 @@ type PropsType = {
   }) => void;
 };
 
-const SpellCard = ({ card, setShowToast }: PropsType) => {
-  const prevAddedCards = readLS(MY_SPELLS_LS_KEY) || [];
-
+const SpellCard = ({ card, isCardAdded, setShowToast }: PropsType) => {
   const [hideCardButton, setHideCardButton] = useState(true);
-  const [addedCards, setAddedCards] = useState(prevAddedCards);
+  const [isSaved, setIsSaved] = useState(isCardAdded);
 
   const {
     name,
@@ -45,22 +39,26 @@ const SpellCard = ({ card, setShowToast }: PropsType) => {
     requires_concentration,
   } = card;
 
-  const isCardAdded = addedCards.some((cardId) => cardId === id);
-
   const [castingTime, castingConditions] = casting_time.split(', ');
 
-  const handleAddCard = () => {
-    const updatedCards = [...addedCards, id];
-    updateLS(MY_SPELLS_LS_KEY, id);
-    setAddedCards(updatedCards);
-    setShowToast({ name, id, action: 'Add' });
+  const handleAddCard = async () => {
+    await SavedSpellsAPI.addSpell({
+      card,
+      onSuccess: () => {
+        setIsSaved(true);
+        setShowToast({ name, id, action: 'Add' });
+      },
+    });
   };
 
-  const handleRemoveCard = () => {
-    const filteredCards = addedCards.filter((card) => card !== id);
-    removeLS(MY_SPELLS_LS_KEY, id);
-    setAddedCards(filteredCards);
-    setShowToast({ name, id, action: 'Remove' });
+  const handleRemoveCard = async () => {
+    await SavedSpellsAPI.removeSpell({
+      id,
+      onSuccess: () => {
+        setIsSaved(false);
+        setShowToast({ name, id, action: 'Remove' });
+      },
+    });
   };
 
   return (
@@ -70,7 +68,7 @@ const SpellCard = ({ card, setShowToast }: PropsType) => {
       onMouseLeave={() => setHideCardButton(true)}
     >
       <div className={styles.header}>
-        {isCardAdded ? (
+        {isSaved ? (
           <RemoveButton onClick={handleRemoveCard} hidden={hideCardButton} />
         ) : (
           <AddButton onClick={handleAddCard} hidden={hideCardButton} />

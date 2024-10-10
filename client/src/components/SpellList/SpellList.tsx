@@ -1,27 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Slide, { SlideProps } from '@mui/material/Slide';
 import Snackbar from '@mui/material/Snackbar';
 import CircularProgress from '@mui/material/CircularProgress';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import SpellCard from '../SpellCard';
-import { CardType, ToastActionType } from '../../types';
+import { CardType, ToastActionType } from '../../types/types';
 import styles from './SpellList.module.css';
+import * as SavedSpellsAPI from '../../utils/SavedSpellsAPI';
 
 type PropsType = {
   cards: Array<CardType>;
   isLoading?: boolean;
   hideCardOnRemove?: boolean;
+  addedCards?: Array<CardType>;
 };
 
 const SpellList = ({
   cards,
   isLoading = false,
   hideCardOnRemove = false,
+  addedCards,
 }: PropsType) => {
   const [cardsToShow, setCardsToShow] = useState<CardType[]>([]);
+  const [prevAddedCards, setPrevAddedCards] = useState<CardType[]>([]);
   const [isToastOpen, setIsToastOpen] = useState(false);
   const [toastId, setToastId] = useState('');
   const [toastMsg, setToastMsg] = useState('');
+
+  useEffect(() => {
+    const getSavedSpells = async () => {
+      return await SavedSpellsAPI.getAllSpells({
+        onSuccess: (data) => {
+          setPrevAddedCards(data ? [...data] : []);
+        },
+      });
+    };
+
+    if (addedCards && addedCards.length > 0) {
+      setPrevAddedCards([...addedCards]);
+    } else {
+      getSavedSpells();
+    }
+    // optimizing to only run on first render
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     setCardsToShow([...cards]);
@@ -49,6 +71,10 @@ const SpellList = ({
     }
   };
 
+  const getIsCardAdded = (id: string): boolean => {
+    return prevAddedCards.some((prevAddedCard) => prevAddedCard.slug === id);
+  };
+
   if (isLoading) return <CircularProgress />;
   if (!cardsToShow.length) return <span>No spells found</span>;
 
@@ -57,7 +83,11 @@ const SpellList = ({
       <ul className={styles.list}>
         {cardsToShow.map((card) => (
           <li key={card.slug} className={styles.item}>
-            <SpellCard card={card} setShowToast={handleShowToast} />
+            <SpellCard
+              card={card}
+              isCardAdded={getIsCardAdded(card.slug)}
+              setShowToast={handleShowToast}
+            />
           </li>
         ))}
       </ul>
