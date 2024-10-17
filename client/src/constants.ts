@@ -23,7 +23,9 @@ export const schoolsOfMagic = [
   'Conjuration',
   'Divination',
   'Enchantment',
+  'Evocation',
   'Illusion',
   'Invocation',
   'Necromancy',
+  'Transmutation',
 ] as const;

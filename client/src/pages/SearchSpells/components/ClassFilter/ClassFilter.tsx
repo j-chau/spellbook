@@ -1,6 +1,6 @@
 import React from 'react';
 import { playableClasses } from '../../../../constants';
-import { PlayableClassesType } from '../../../../types';
+import { PlayableClassesType } from '../../../../types/types';
 import Filter from '../../../../components/Filter';
 
 type PropsType = {

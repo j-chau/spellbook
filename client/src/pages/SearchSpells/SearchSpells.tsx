@@ -12,7 +12,7 @@ import {
   SchoolsOfMagicType,
   isValidPlayerClass,
   isValidSchoolOfMagic,
-} from '../../types';
+} from '../../types/types';
 import { useDebounce } from '../../hooks/useDebounce';
 import { BASE_URL } from '../../constants';
 import { useSearchParams } from 'react-router-dom';
